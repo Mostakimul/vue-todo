@@ -1,10 +1,13 @@
 <script setup>
 import { RouterView } from 'vue-router';
+import TodoNavigation from './components/TodoNavigation.vue';
 </script>
 
 <template>
-  <h2>Hwloooo</h2>
-  <RouterView />
+  <main class="container mx-auto">
+    <TodoNavigation />
+    <RouterView />
+  </main>
 </template>
 
 <style></style>
