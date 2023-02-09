@@ -23,10 +23,14 @@ const createTodo = (todo) => {
   </section>
 
   <!-- Todo items -->
-  <section class="mt-5">
+  <section v-if="todos.length > 0" class="mt-5">
     <CommonTitle>Todo Items</CommonTitle>
     <ul class="w-2/6 mx-auto">
       <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
     </ul>
   </section>
+  <!-- No todo msg -->
+  <p v-else class="mt-5 text-center">
+    You don't have any todos! Please add one.
+  </p>
 </template>
