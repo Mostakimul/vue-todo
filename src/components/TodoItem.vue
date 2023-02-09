@@ -7,7 +7,13 @@ const props = defineProps({
     required: true,
     // default: It will only works string, number or boolean
   },
+  index: {
+    type: Number,
+    required: true,
+  },
 });
+
+defineEmits(['toggle-complete']);
 </script>
 
 <template>
@@ -17,8 +23,9 @@ const props = defineProps({
     <div class="flex items-center gap-5">
       <!-- checkbox -->
       <input
-        type="checkbox"
         :checked="todo.isCompleted"
+        @input="$emit('toggle-complete', index)"
+        type="checkbox"
         class="appearance-none w-5 h-5 bg-white rounded-full shadow-md checked:bg-green-500"
       />
       <!-- input and text div -->
@@ -29,7 +36,9 @@ const props = defineProps({
           :value="todo.todo"
           class="rounded p-1 border-2 border-green-600"
         />
-        <p v-else>{{ todo.todo }}</p>
+        <p v-else :class="{ 'line-through': todo.isCompleted }">
+          {{ todo.todo }}
+        </p>
       </div>
     </div>
     <!-- icons div -->

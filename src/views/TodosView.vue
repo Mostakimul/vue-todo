@@ -14,6 +14,10 @@ const createTodo = (todo) => {
     isEditing: null,
   });
 };
+
+const toggleComplete = (todoPos) => {
+  todos.value[todoPos].isCompleted = !todos.value[todoPos].isCompleted;
+};
 </script>
 
 <template>
@@ -26,7 +30,13 @@ const createTodo = (todo) => {
   <section v-if="todos.length > 0" class="mt-5">
     <CommonTitle>Todo Items</CommonTitle>
     <ul class="w-2/6 mx-auto">
-      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+      <TodoItem
+        v-for="(todo, index) in todos"
+        :key="todo.id"
+        :todo="todo"
+        :index="index"
+        @toggle-complete="toggleComplete"
+      />
     </ul>
   </section>
   <!-- No todo msg -->
