@@ -18,6 +18,14 @@ const createTodo = (todo) => {
 const toggleComplete = (todoPos) => {
   todos.value[todoPos].isCompleted = !todos.value[todoPos].isCompleted;
 };
+
+const toggleEditTodo = (todoPos) => {
+  todos.value[todoPos].isEditing = !todos.value[todoPos].isEditing;
+};
+
+const updateTodo = (todoVal, todoPos) => {
+  todos.value[todoPos].todo = todoVal;
+};
 </script>
 
 <template>
@@ -36,6 +44,8 @@ const toggleComplete = (todoPos) => {
         :todo="todo"
         :index="index"
         @toggle-complete="toggleComplete"
+        @edit-todo="toggleEditTodo"
+        @update-todo="updateTodo"
       />
     </ul>
   </section>
