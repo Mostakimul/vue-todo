@@ -1,7 +1,9 @@
 <script setup>
 import { uid } from 'uid';
 import { ref } from 'vue';
+import CommonTitle from '../components/CommonTitle.vue';
 import TodoInput from '../components/TodoInput.vue';
+import TodoItem from '../components/TodoItem.vue';
 
 const todos = ref([]);
 const createTodo = (todo) => {
@@ -16,7 +18,15 @@ const createTodo = (todo) => {
 
 <template>
   <section class="bg-slate-300 rounded-md mt-5 p-5">
-    <h1 class="font-semibold text-center text-xl">Create Todos</h1>
+    <CommonTitle>Create Todos</CommonTitle>
     <TodoInput @create-todo="createTodo" />
+  </section>
+
+  <!-- Todo items -->
+  <section class="mt-5">
+    <CommonTitle>Todo Items</CommonTitle>
+    <ul class="w-2/6 mx-auto">
+      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    </ul>
   </section>
 </template>

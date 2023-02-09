@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, reactive } from 'vue';
+import { reactive } from 'vue';
 import TodoButton from './TodoButton.vue';
 // reactive using ref
 const todoState = reactive({
@@ -34,12 +34,6 @@ const createTodo = () => {
         {{ todoState.errMsg }}
       </p>
     </div>
-    <!-- <button
-      @click="createTodo"
-      class="px-5 bg-green-500 rounded-md mx-5 py-1 ring-1 ring-gray-800 font-semibold shadow-md"
-    >
-      Create
-    </button> -->
     <TodoButton @click="createTodo">Create</TodoButton>
   </div>
 </template>
