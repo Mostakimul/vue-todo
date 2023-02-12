@@ -27,7 +27,7 @@ const editTodo = (index) => {
 
 <template>
   <li
-    class="flex items-center justify-between gap-4 bg-gray-300 px-3 py-2 rounded-md group"
+    class="flex my-3 items-center justify-between bg-gray-300 px-3 py-2 rounded-md group"
   >
     <div class="flex items-center gap-5">
       <!-- checkbox -->

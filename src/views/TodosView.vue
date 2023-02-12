@@ -6,6 +6,20 @@ import TodoInput from '../components/TodoInput.vue';
 import TodoItem from '../components/TodoItem.vue';
 
 const todos = ref([]);
+
+const getTodosFromLocalStorage = () => {
+  const storedTodos = JSON.parse(localStorage.getItem('todos'));
+  if (storedTodos) {
+    todos.value = storedTodos;
+  }
+};
+
+getTodosFromLocalStorage();
+
+const storeTodosInLocalStorage = () => {
+  localStorage.setItem('todos', JSON.stringify(todos.value));
+};
+
 const createTodo = (todo) => {
   todos.value.push({
     id: uid(),
@@ -13,24 +27,28 @@ const createTodo = (todo) => {
     isCompleted: null,
     isEditing: null,
   });
+  storeTodosInLocalStorage();
 };
 
 const toggleComplete = (todoPos) => {
   todos.value[todoPos].isCompleted = !todos.value[todoPos].isCompleted;
+  storeTodosInLocalStorage();
 };
 
 const toggleEditTodo = (todoPos) => {
   todos.value[todoPos].isEditing = !todos.value[todoPos].isEditing;
+  storeTodosInLocalStorage();
 };
 
 const updateTodo = (todoVal, todoPos) => {
   todos.value[todoPos].todo = todoVal;
+  storeTodosInLocalStorage();
 };
 
 const deleteTodo = (todoId) => {
-  todos.value = todos.value.filter((todo) => {
-    todo.id != todoId;
-  });
+  console.log(todoId);
+  todos.value = todos.value.filter((todo) => todo.id !== todoId);
+  storeTodosInLocalStorage();
 };
 </script>
 
@@ -52,7 +70,7 @@ const deleteTodo = (todoId) => {
         @toggle-complete="toggleComplete"
         @edit-todo="toggleEditTodo"
         @update-todo="updateTodo"
-        @delte-todo="deleteTodo"
+        @delete-todo="deleteTodo"
       />
     </ul>
   </section>
