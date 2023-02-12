@@ -1,6 +1,6 @@
 <script setup>
 import { uid } from 'uid';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import CommonTitle from '../components/CommonTitle.vue';
 import TodoInput from '../components/TodoInput.vue';
 import TodoItem from '../components/TodoItem.vue';
@@ -16,6 +16,10 @@ watch(
     deep: true,
   },
 );
+
+const todoCompleted = computed(() => {
+  return todos.value.every((todo) => todo.isCompleted);
+});
 
 const getTodosFromLocalStorage = () => {
   const storedTodos = JSON.parse(localStorage.getItem('todos'));
@@ -80,7 +84,15 @@ const deleteTodo = (todoId) => {
     </ul>
   </section>
   <!-- No todo msg -->
-  <p v-else class="mt-5 text-center">
+  <p v-else class="mt-5 text-center text-red-500">
     You don't have any todos! Please add one.
+  </p>
+
+  <!-- complete msg -->
+  <p
+    v-if="todoCompleted && todos.length > 0"
+    class="mt-5 text-center text-green-500"
+  >
+    You have completed all todos!
   </p>
 </template>
