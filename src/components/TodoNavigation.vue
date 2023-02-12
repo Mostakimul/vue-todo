@@ -3,7 +3,7 @@
     <nav
       class="bg-gray-300 rounded-md mt-5 p-5 flex justify-between items-center"
     >
-      <div>
+      <div class="flex items-center gap-2">
         <img src="../assets/vue_logo.png" alt="vue-logo" class="w-16" />
         <h2 class="font-bold">Vue Todos</h2>
       </div>
