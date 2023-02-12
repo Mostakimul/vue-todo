@@ -1,11 +1,21 @@
 <script setup>
 import { uid } from 'uid';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import CommonTitle from '../components/CommonTitle.vue';
 import TodoInput from '../components/TodoInput.vue';
 import TodoItem from '../components/TodoItem.vue';
 
 const todos = ref([]);
+
+watch(
+  todos,
+  () => {
+    storeTodosInLocalStorage();
+  },
+  {
+    deep: true,
+  },
+);
 
 const getTodosFromLocalStorage = () => {
   const storedTodos = JSON.parse(localStorage.getItem('todos'));
@@ -27,28 +37,23 @@ const createTodo = (todo) => {
     isCompleted: null,
     isEditing: null,
   });
-  storeTodosInLocalStorage();
 };
 
 const toggleComplete = (todoPos) => {
   todos.value[todoPos].isCompleted = !todos.value[todoPos].isCompleted;
-  storeTodosInLocalStorage();
 };
 
 const toggleEditTodo = (todoPos) => {
   todos.value[todoPos].isEditing = !todos.value[todoPos].isEditing;
-  storeTodosInLocalStorage();
 };
 
 const updateTodo = (todoVal, todoPos) => {
   todos.value[todoPos].todo = todoVal;
-  storeTodosInLocalStorage();
 };
 
 const deleteTodo = (todoId) => {
   console.log(todoId);
   todos.value = todos.value.filter((todo) => todo.id !== todoId);
-  storeTodosInLocalStorage();
 };
 </script>
 
