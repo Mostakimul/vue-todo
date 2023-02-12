@@ -7,6 +7,7 @@ import TodoItem from '../components/TodoItem.vue';
 
 const todos = ref([]);
 
+// watching todos to change and storing in localstorage
 watch(
   todos,
   () => {
@@ -17,6 +18,7 @@ watch(
   },
 );
 
+// track completed todos
 const todoCompleted = computed(() => {
   return todos.value.every((todo) => todo.isCompleted);
 });
@@ -27,7 +29,7 @@ const getTodosFromLocalStorage = () => {
     todos.value = storedTodos;
   }
 };
-
+// fetching todos from localstorage
 getTodosFromLocalStorage();
 
 const storeTodosInLocalStorage = () => {
@@ -83,6 +85,7 @@ const deleteTodo = (todoId) => {
       />
     </ul>
   </section>
+
   <!-- No todo msg -->
   <p v-else class="mt-5 text-center text-red-500">
     You don't have any todos! Please add one.
