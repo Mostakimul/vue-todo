@@ -13,7 +13,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['toggle-complete', 'edit-todo', 'update-todo']);
+const emit = defineEmits([
+  'toggle-complete',
+  'edit-todo',
+  'update-todo',
+  'delete-todo',
+]);
 
 const editTodo = (index) => {
   emit('edit-todo', index);
@@ -64,7 +69,13 @@ const editTodo = (index) => {
         color="#41b080"
         width="20"
       />
-      <Icon class="cursor-pointer" icon="ph:trash" color="#f95e5e" width="20" />
+      <Icon
+        @click="$emit('delete-todo', todo.id)"
+        class="cursor-pointer"
+        icon="ph:trash"
+        color="#f95e5e"
+        width="20"
+      />
     </div>
   </li>
 </template>
